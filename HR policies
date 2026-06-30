@@ -1,0 +1,181 @@
+HR Policies – Ascendion)
+🧾 Basic Fields
+
+
+Project Name: ASC-HR (Ascendion HR Operations)
+
+
+Issue Type:
+
+Policy Update
+Policy Clarification
+Policy Exception Request
+Employee Query
+
+
+
+Summary:
+Example: “Clarification required on Work From Home policy eligibility”
+
+
+Description:
+Include:
+
+Background/context
+Specific policy reference
+Employee concern or request
+Expected resolution
+
+
+
+
+🏷️ Classification Fields
+
+
+HR Policy Category:
+
+Leave Policy
+Work From Home / Hybrid Policy
+Compensation & Benefits
+Travel & Expense
+Code of Conduct
+Performance Management
+Diversity & Inclusion
+
+
+
+Sub-category:
+
+Sick Leave / Casual Leave
+Remote Work Eligibility
+Payroll Discrepancy
+Reimbursement Rules
+
+
+
+Priority:
+
+P1 – Critical (compliance/legal impact)
+P2 – High (urgent employee impact)
+P3 – Medium
+P4 – Low
+
+
+
+
+👤 Stakeholder Fields
+
+Reporter: Employee / HR SPOC
+Assignee: HR Operations / HRBP
+Approver (if applicable): HR Manager / Legal / Finance
+Employee ID: (if employee-specific issue)
+Department: Engineering / Sales / Support, etc.
+Location: Bangalore / Hyderabad / Remote
+
+
+📅 Timeline Fields
+
+
+Created Date
+
+
+Due Date / SLA:
+
+Standard Query → 2 business days
+Policy Exception → 5 business days
+Compliance Issue → Immediate
+
+
+
+Resolution Date
+
+
+
+🔍 Policy Reference Fields
+
+
+Policy Document Link:
+(Confluence / SharePoint URL)
+
+
+Policy Version:
+Example: v3.2 (Effective Jan 2026)
+
+
+Effective Date of Policy
+
+
+Compliance Impact:
+
+Yes / No
+If Yes → Legal review required
+
+
+
+
+🔄 Workflow Status
+
+Open
+In Review
+Needs Clarification
+Approved / Rejected
+Resolved
+Closed
+
+
+📎 Attachments / Evidence
+
+Supporting documents:
+
+Policy PDF
+Payslip / Screenshot
+Email communication
+Exception request form
+
+
+
+
+🧠 Additional Metadata (Advanced)
+
+
+Tags / Labels:
+
+WFH-policy
+leave-clarification
+payroll-issue
+compliance
+
+
+
+Escalation Level:
+
+Level 1 – HR Ops
+Level 2 – HRBP
+Level 3 – Legal / Leadership
+
+
+
+Confidentiality Level:
+
+Public (General policy queries)
+Restricted (Employee-specific)
+Highly Confidential (Legal/disciplinary)
+
+
+
+
+✅ Example Ticket (Filled)
+Summary: Request for exception to WFH policy for medical reasons
+Issue Type: Policy Exception Request
+Priority: High
+HR Policy Category: Work From Home
+Sub-category: Special Accommodation
+Description:
+Employee is requesting extended WFH beyond allowed duration due to medical condition. Requires HR approval.
+Employee ID: ASC12345
+Department: Engineering
+Location: Bangalore
+Policy Reference: WFH Policy v3.2
+Compliance Impact: Yes
+Status: In Review
+Approver: HRBP + Legal
