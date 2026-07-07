@@ -1,169 +1,252 @@
 # Test Cases for KAN-8: Implement Promo Code Validation and Dynamic Cart Discount Calculation
 
-## Story Title
-Implement Promo Code Validation and Dynamic Cart Discount Calculation
+---
 
-## Traceability
-[Jira Issue KAN-8](https://jira.example.com/browse/KAN-8)
+**Test Case ID:** TC-KAN-8-001  
+**Preconditions:** User is logged in and has items in the cart; promo code feature is enabled  
+**Steps:**  
+1. Navigate to the checkout page  
+2. Enter a valid promo code in the promo code input field  
+3. Click "Apply"  
+**Expected Results:** Discount is applied to the cart total; success message is displayed  
+**Negative Scenarios:** Entering an expired or invalid promo code  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
 
 ---
 
-### Test Case ID: TC-KAN-8-001
-**Preconditions:**
-- User is logged in (if required for checkout)
-- User has at least one item in the cart
-- Valid promo codes exist in the system
-**Steps:**
-1. Navigate to the checkout page
-2. Enter a valid promo code in the promo code input field
-3. Click "Apply"
-**Expected Results:**
-- Promo code is validated successfully
-- Cart total is updated to reflect the discount
-- Success message is displayed confirming promo code application
-**Negative Scenarios:**
-- Entering an expired promo code
-- Entering an invalid promo code
-- Applying the same promo code twice
-- Applying a promo code not applicable to items in the cart
+**Test Case ID:** TC-KAN-8-002  
+**Preconditions:** User is on the checkout page with items in the cart  
+**Steps:**  
+1. Enter an invalid promo code  
+2. Click "Apply"  
+**Expected Results:** Error message is displayed; no discount applied  
+**Negative Scenarios:** SQL injection attempt in promo code field  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
 
 ---
 
-### Test Case ID: TC-KAN-8-002
-**Preconditions:**
-- User is on the checkout page with items in the cart
-- No promo code applied yet
-**Steps:**
-1. Enter an invalid promo code (e.g., random string or code not in system)
-2. Click "Apply"
-**Expected Results:**
-- Error message is displayed indicating invalid promo code
-- Cart total remains unchanged
-**Negative Scenarios:**
-- Submitting empty promo code field
-- Submitting promo code with special characters
+**Test Case ID:** TC-KAN-8-003  
+**Preconditions:** User is on the checkout page; promo code has usage limit  
+**Steps:**  
+1. Enter a promo code that has reached its usage limit  
+2. Click "Apply"  
+**Expected Results:** Error message indicating usage limit reached; no discount applied  
+**Negative Scenarios:** Attempting to reuse a single-use code  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
 
 ---
 
-### Test Case ID: TC-KAN-8-003
-**Preconditions:**
-- User is on the checkout page with items in the cart
-- Valid promo code with usage limit exists
-**Steps:**
-1. Apply a valid promo code until its usage limit is reached
-2. Attempt to apply the same promo code again
-**Expected Results:**
-- Error message is displayed indicating promo code usage limit reached
-- Cart total remains unchanged
-**Negative Scenarios:**
-- Attempting to apply promo code after expiration date
+**Test Case ID:** TC-KAN-8-004  
+**Preconditions:** User is on the checkout page; promo code is expired  
+**Steps:**  
+1. Enter an expired promo code  
+2. Click "Apply"  
+**Expected Results:** Error message indicating code is expired; no discount applied  
+**Negative Scenarios:** System clock manipulation  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
 
 ---
 
-### Test Case ID: TC-KAN-8-004
-**Preconditions:**
-- User is on the checkout page with items in the cart
-- Multiple promo codes exist (some stackable, some not)
-**Steps:**
-1. Apply a stackable promo code
-2. Apply a second stackable promo code
-3. Attempt to apply a non-stackable promo code
-**Expected Results:**
-- Stackable promo codes are applied cumulatively
-- Non-stackable promo code application is rejected with appropriate message
-**Negative Scenarios:**
-- Attempting to apply more promo codes than allowed
+**Test Case ID:** TC-KAN-8-005  
+**Preconditions:** User is on the checkout page; promo code is valid for specific products  
+**Steps:**  
+1. Add eligible and ineligible products to cart  
+2. Enter promo code  
+3. Click "Apply"  
+**Expected Results:** Discount applied only to eligible products; ineligible products not discounted  
+**Negative Scenarios:** All products ineligible  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
 
 ---
 
-### Test Case ID: TC-KAN-8-005
-**Preconditions:**
-- User is on the checkout page with items in the cart
-- Valid promo code is applied
-**Steps:**
-1. Remove an item from the cart
-2. Observe if promo code is still valid/applicable
-3. Add an ineligible item to the cart
-**Expected Results:**
-- Promo code is revalidated
-- If cart no longer meets promo code criteria, discount is removed and user is notified
-**Negative Scenarios:**
-- Cart manipulation to bypass promo code restrictions
+**Test Case ID:** TC-KAN-8-006  
+**Preconditions:** User is on the checkout page; promo code is case-insensitive  
+**Steps:**  
+1. Enter promo code in different cases (e.g., "SAVE10", "save10")  
+2. Click "Apply"  
+**Expected Results:** Discount applied regardless of case  
+**Negative Scenarios:** Case-sensitive validation  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
 
 ---
 
-### Test Case ID: TC-KAN-8-006
-**Preconditions:**
-- User is on the checkout page with items in the cart
-- Valid promo code is applied
-**Steps:**
-1. Proceed to payment
-2. Complete the order
-**Expected Results:**
-- Discount is reflected in the final order summary and confirmation
-- Promo code usage is recorded in the system
-**Negative Scenarios:**
-- Network failure during order submission
-- Promo code removed from system before order completion
+**Test Case ID:** TC-KAN-8-007  
+**Preconditions:** User is on the checkout page; promo code is valid for minimum cart value  
+**Steps:**  
+1. Add items below minimum value  
+2. Enter promo code  
+3. Click "Apply"  
+**Expected Results:** Error message indicating minimum value not met  
+**Negative Scenarios:** Cart value exactly at threshold  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
 
 ---
 
-### Test Case ID: TC-KAN-8-007
-**Preconditions:**
-- User is on the checkout page
-- Promo code validation service is unavailable (simulate backend failure)
-**Steps:**
-1. Enter a promo code
-2. Click "Apply"
-**Expected Results:**
-- User receives a clear error message indicating service is unavailable
-- Cart total remains unchanged
-**Negative Scenarios:**
-- System does not handle service failure gracefully (e.g., unhandled exception)
+**Test Case ID:** TC-KAN-8-008  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply"  
+3. Remove an item from the cart  
+**Expected Results:** Discount recalculated dynamically  
+**Negative Scenarios:** Discount not updated after cart change  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
 
 ---
 
-### Test Case ID: TC-KAN-8-008
-**Preconditions:**
-- User is on the checkout page
-- Cart contains items with different eligibility (some eligible, some not)
-**Steps:**
-1. Apply a promo code only valid for certain items
-**Expected Results:**
-- Discount is applied only to eligible items
-- Ineligible items are not discounted
-- UI clearly indicates which items received the discount
-**Negative Scenarios:**
-- Discount applied incorrectly to ineligible items
+**Test Case ID:** TC-KAN-8-009  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply"  
+3. Add more items to the cart  
+**Expected Results:** Discount recalculated based on new cart total  
+**Negative Scenarios:** Discount not updated after cart change  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
 
 ---
 
-## Audit Log
-- [2024-12-19T10:32:00Z] Test cases generated for KAN-8 by QA Automation Agent
-- Sensitive information filtered: No PII/PHI/PCI detected
-- All actions logged for compliance and traceability
-- Output structured for integration with QA tools and CI/CD pipelines
+**Test Case ID:** TC-KAN-8-010  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply"  
+3. Proceed to payment  
+**Expected Results:** Discount reflected in payment summary and final charge  
+**Negative Scenarios:** Discount not reflected in payment gateway  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
 
 ---
 
-## Compliance Report
-- Data Classification: Internal Business Data
-- Sensitivity Level: Low (No sensitive customer data in issue description)
-- PII/PHI/PCI Status: CLEAR - No sensitive data detected
-- Access Control Compliance: PASSED
-  - RBAC permissions verified
-  - User authentication validated
-  - API token security confirmed
-- Audit Trail Compliance: COMPLIANT
-  - All triage actions logged with timestamps
-  - Decision rationale documented
-  - Compliance metadata captured
-  - ISO27001 standards maintained
-- Data Retention: 7-year retention policy applied
-- Consent Status: Not applicable (internal development task)
-- Data Lineage: Fully documented and traceable
-- Compliance Certifications Applied:
-  - ISO27001: Information Security Management
-  - SOC2: Service Organization Control Type 2
-  - Internal QE Standards: Defect Management Protocol v3.2
-- Next Review Date: 2024-12-26T10:30:00Z (7-day follow-up cycle)
+**Test Case ID:** TC-KAN-8-011  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply"  
+3. Refresh the page  
+**Expected Results:** Discount persists after page reload  
+**Negative Scenarios:** Discount lost after reload  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
+
+---
+
+**Test Case ID:** TC-KAN-8-012  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply"  
+3. Remove promo code  
+**Expected Results:** Discount is removed; cart total returns to original  
+**Negative Scenarios:** Discount remains after removal  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
+
+---
+
+**Test Case ID:** TC-KAN-8-013  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply"  
+3. Enter another promo code  
+**Expected Results:** Only one promo code can be applied at a time  
+**Negative Scenarios:** Multiple codes applied simultaneously  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
+
+---
+
+**Test Case ID:** TC-KAN-8-014  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply"  
+3. Open checkout in another browser/tab  
+**Expected Results:** Promo code application is session-specific  
+**Negative Scenarios:** Promo code applied across sessions  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
+
+---
+
+**Test Case ID:** TC-KAN-8-015  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply"  
+3. Attempt to apply the same code again  
+**Expected Results:** Error message indicating code already applied  
+**Negative Scenarios:** Duplicate discount applied  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
+
+---
+
+**Test Case ID:** TC-KAN-8-016  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply"  
+3. Complete checkout  
+4. Review order history  
+**Expected Results:** Discount and promo code details recorded in order history  
+**Negative Scenarios:** Discount not reflected in order history  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
+
+---
+
+**Test Case ID:** TC-KAN-8-017  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply"  
+3. Simulate network failure during application  
+**Expected Results:** Transaction is atomic; no partial discount applied  
+**Negative Scenarios:** Partial discount or inconsistent state  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
+
+---
+
+**Test Case ID:** TC-KAN-8-018  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply" rapidly multiple times  
+**Expected Results:** Rate limiting prevents abuse; only one application processed  
+**Negative Scenarios:** Multiple discounts applied  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
+
+---
+
+**Test Case ID:** TC-KAN-8-019  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code with leading/trailing spaces  
+2. Click "Apply"  
+**Expected Results:** Spaces are trimmed; code is validated correctly  
+**Negative Scenarios:** Code rejected due to whitespace  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
+
+---
+
+**Test Case ID:** TC-KAN-8-020  
+**Preconditions:** User is on the checkout page; promo code is valid  
+**Steps:**  
+1. Enter promo code  
+2. Click "Apply"  
+3. Attempt to checkout with invalid payment details  
+**Expected Results:** Discount remains applied; payment fails gracefully  
+**Negative Scenarios:** Discount lost after payment failure  
+**Traceability:** [KAN-8](https://shivaneeh.atlassian.net/browse/KAN-8)
+
+---
+
+**Audit Log:**  
+- 2024-12-19T10:30:08Z - Test cases generated for KAN-8  
+- 2024-12-19T10:30:09Z - Output filtered for sensitive information (none detected)  
+- 2024-12-19T10:30:10Z - Test cases structured for QA tool/CI integration
+
+**Compliance:**  
+- No PII/PCI/PHI present  
+- All actions logged for audit  
+- Output ready for integration with QA automation tools and CI/CD pipelines
+
+---
+
+**End of Output**
