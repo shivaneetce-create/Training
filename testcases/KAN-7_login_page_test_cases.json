@@ -1,0 +1,15 @@
+{
+  "story_title": "Login page of a mobile application",
+  "issue_key": "KAN-7",
+  "status": "Idea",
+  "test_cases_generated": false,
+  "reason": "The Story is currently not ready and hence the test cases could not be generated.",
+  "traceability_link": "https://jira.example.com/browse/KAN-7",
+  "audit_log": [
+    "Fetched issue details for KAN-7 from Jira.",
+    "Status is 'Idea', not 'Ready'.",
+    "Test case generation halted as per instructions.",
+    "Sensitive information filtered.",
+    "Traceability link provided."
+  ]
+}
